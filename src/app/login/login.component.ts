@@ -37,23 +37,23 @@ export class LoginComponent implements OnInit {
 
   
 
-  submit(data){
-    this._logindata.callLogin(data).subscribe(data =>{
-      this.token = data;
-      if (this.token.token) {
-        const expiresAt = moment().add(this.token.expiresIn,'second');
-        let localStorage : any;
-        localStorage.setItem('csrftoken', this.token.token);
-        localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()) );
-        // this.cookie.set("csrftoken",this.token.token);
-        console.log('local token',localStorage.getItem('csrftoken'))
-        this.router.navigate(['dashboard/bayhome']);
-      }
-    }, (err)=> {
-        this.messageresponse = "Please check your email or password";
-        // this.openModal(this.messageresponse);
-    })
-  }
+  // submit(data){
+  //   this._logindata.callLogin(data).subscribe(data =>{
+  //     this.token = data;
+  //     if (this.token.token) {
+  //       const expiresAt = moment().add(this.token.expiresIn,'second');
+  //       let localStorage : any;
+  //       localStorage.setItem('csrftoken', this.token.token);
+  //       localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()) );
+  //       // this.cookie.set("csrftoken",this.token.token);
+  //       console.log('local token',localStorage.getItem('csrftoken'))
+  //       this.router.navigate(['dashboard/bayhome']);
+  //     }
+  //   }, (err)=> {
+  //       this.messageresponse = "Please check your email or password";
+  //       // this.openModal(this.messageresponse);
+  //   })
+  //}
     
   
 
