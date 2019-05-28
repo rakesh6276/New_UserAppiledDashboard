@@ -15,7 +15,7 @@ declare var $ :any;
 })
 export class BayhomeComponent implements OnInit {
   [x: string]: any;
-  constructor(private _data1:DataService,
+  constructor(private http:HttpClient,private _data1:DataService,
     private route:ActivatedRoute,
     private router:Router) { }
 
