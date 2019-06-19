@@ -1,11 +1,10 @@
 
   
 import { Component, Input, OnInit, OnChanges, DoCheck } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
+//  import { CookieService } from 'ngx-cookie-service';
 import { Router, ActivatedRoute, NavigationStart } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { DataService } from './data.service';
-import { moment } from 'ngx-bootstrap/chronos/test/chain';
+//import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-root',
@@ -15,11 +14,9 @@ import { moment } from 'ngx-bootstrap/chronos/test/chain';
 export class AppComponent implements OnInit {
   title = 'app';
   public internalVal = null;
-  token:any;
-  messageresponse:string;
+  
  
-  constructor(private cookie:CookieService,private _logindata:DataService,
-  private route:ActivatedRoute,private router:Router,private _http:HttpClient) { 
+  constructor(private route:ActivatedRoute,private router:Router) { 
 
     // router.events.subscribe(event => {
     //   if(event instanceof NavigationStart) {
@@ -32,20 +29,19 @@ export class AppComponent implements OnInit {
     //   }
     // });
 
-    // if(!localStorage.getItem('csrftoken')){
-    //   console.log("NO TOKEN IN APP");
-    //   this.router.navigate(['']);
-    // }
+    if(!localStorage.getItem('csrftoken')){
+      console.log("NO TOKEN IN APP");
+      this.router.navigate(['']);
+    }
     
   }
  
 
   ngOnInit(){
 
-    this.router.navigate(['dashboard/bayhome']);
+    // this.router.navigate(['dashboard/bayhome']);
 
-  
-    this.submit();
+    
     // this.cookie.get('csrftoken')
   //   console.log(this.cookie.get('csrftoken'));
   //   if (this.cookie.get('csrftoken')) {
@@ -61,26 +57,6 @@ export class AppComponent implements OnInit {
     
   }
 
-  submit(){
-    let loginData = {email:"bay@amat.com",password:'bay123'};
-    console.log('LOGINOBJ',loginData);
-   this._logindata.callLogin(loginData).subscribe(data =>{
-     console.log('ABCD0',data);
-     this.token = data;
-     console.log('LOGINOBJ in APP',this.token);
-     if (this.token.token) {
-       const expiresAt = moment().add(this.token.expiresIn,'second');
-
-       localStorage.setItem('csrftoken', this.token.token);
-       localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()) );
-       // this.cookie.set("csrftoken",this.token.token);
-       console.log('local token',localStorage.getItem('csrftoken'))
-       
-     }
-   }, (err)=> {
-       this.messageresponse = "Please check your email or password";
-   })
- }
  
 
 

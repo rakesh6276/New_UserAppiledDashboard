@@ -25,7 +25,8 @@ export class DataService {
 
   
 
-constructor(private http:HttpClient,private cookie:CookieService) {
+constructor(private http:HttpClient,private cookie:CookieService
+){
 }
   
    
@@ -207,9 +208,9 @@ saveNewTools(data){
     }).catch(this.handleError)
 }
 
-// loggedIn(){
-//   return !!localStorage.getItem('csrftoken');
-// }
+loggedIn(){
+  return !!localStorage.getItem('csrftoken');
+}
 
 getToken(){
   return localStorage.getItem('csrftoken');
