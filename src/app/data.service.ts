@@ -285,8 +285,11 @@ uploadImage(data){
   }).catch(this.handleError)
 }
 
-
-
+filterCategorytable(data){
+  return this.http.get(this.apiRoot+'/api/tool_category_list/?start_date='+data.start_date+'&end_date='+data.end_date).map((response:Response)=>{
+    return response;
+  }).catch(this.handleError)
+}
 
   private handleError(error: Response) {
     return Observable.throw(error.statusText);
